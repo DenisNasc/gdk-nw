@@ -2,7 +2,7 @@
 url = "https://pypi.org/simple"
 verify_ssl = true
 name = "gdk-nw"
-version = '0.0.1'
+version = '0.0.2'
 
 [packages]
 "discord.py" = "*"
