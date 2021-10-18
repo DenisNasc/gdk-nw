@@ -18,4 +18,4 @@ class MyClient(discord.Client):
 
 
 client = MyClient()
-client.run(BOT_TOKEN)
+client.run(BOT_TOKEN or "")
