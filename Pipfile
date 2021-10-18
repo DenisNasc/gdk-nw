@@ -1,0 +1,18 @@
+[[source]]
+url = ""
+verify_ssl = true
+name = "gdk-nw"
+version = '0.0.1'
+
+[packages]
+"discord.py" = "*"
+python-dotenv = "*"
+
+[dev-packages]
+black = "*"
+
+[requires]
+python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
