@@ -1,8 +1,11 @@
-from dotenv import dotenv_values
+import os
+from dotenv import load_dotenv
 import discord
 
-config = dotenv_values(dotenv_path=".env")
-BOT_TOKEN = config["BOT_TOKEN"]
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class MyClient(discord.Client):
@@ -18,4 +21,4 @@ class MyClient(discord.Client):
 
 
 client = MyClient()
-client.run(BOT_TOKEN or "")
+client.run(BOT_TOKEN)
