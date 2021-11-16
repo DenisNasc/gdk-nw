@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 import discord
+import discord.utils
 
 from commands.help import handle_help_commands
 
@@ -51,6 +52,26 @@ class Bot(discord.Client):
             embed.description = f"Nenhum comando encontrado.\n\nPara saber todos os comandos disponíveis do **Kenner BOT**, digite: `!comandos`"
             reply = await message.channel.send(embed=embed)
             await reply.add_reaction("❌")
+
+    async def on_raw_reaction_add(self, payload):
+        message = await self.get_channel(payload.channel_id).fetch_message(
+            payload.message_id
+        )
+        user = payload.member
+
+        if user == self.user:
+            return
+
+        if message.channel.name == "criar-perfil":
+            role_visitante = discord.utils.get(user.guild.roles, name=f"Visitante")
+            role_colono = discord.utils.get(user.guild.roles, name=f"Colôno")
+
+            message_content = message.content.lower().strip()
+
+            if "**sim, faço parte da gdk**" == message_content:
+                await user.add_roles(role_colono)
+            elif "**não, sou apenas um visitante**" == message_content:
+                await user.add_roles(role_visitante)
 
 
 client = Bot()
